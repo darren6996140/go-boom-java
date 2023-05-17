@@ -4,11 +4,9 @@
 
 No | ID         | Name | Task descriptions | Contribution %
 -- | ---------- | ---- | ----------------- | --------------
-1  | 1221234567 |      |                   |
-2  |            |      |                   |
-3  |            |      |                   |
-4  |            |      |                   |
-
+1  | 1211102809 | Liau Kai Ze |                   |
+2  | 1211102810 | Lai Cheng Yung |                   |
+3  | 1211104336 | Lim Jia Hen |                   |
 
 ## B. Feature Completion
 
@@ -29,6 +27,3 @@ No | Feature                                                                    
 ## C. Link to Video Presentation
 
 Upload your video presentation to your Google drive or YouTube, then paste the link below. Give your lab lecturer the permission to view the video.
-
-https://link_to_your_video_presentation
-
