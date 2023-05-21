@@ -2,11 +2,11 @@
 
 ## A. Member Contributions
 
-No | ID         | Name | Task descriptions | Contribution %
+No | ID         | Name  | Task descriptions | Contribution %
 -- | ---------- | ---- | ----------------- | --------------
-1  | 1211102809 | Liau Kai Ze |                   | 33%
+1  | 1211102809 | Liau Kai Ze |                   | 34%
 2  | 1211102810 | Lai Cheng Yung |                   | 33%
-3  | 1211104336 | Lim Jia Hen |                   | 34%
+3  | 1211104336 | Lim Jia Hen | Deal card to players and center, creating deck, shuffle deck, players hand | 33%
 
 ## B. Feature Completion
 
@@ -20,7 +20,7 @@ No | Feature                                                                    
 4  | The first lead card determines the first player.                                | Y
 5  | Deal 7 cards to each of the 4 players.                                          | Y 
 6  | All players must follow the suit or rank of the lead card.                      | Y
-7  | The highest-rank card with the same suit as the lead card wins the trick.       |  Y
+7  | The highest-rank card with the same suit as the lead card wins the trick.       | Y
 8  | The winner of a trick leads the next card.                                      | Y
 
 
