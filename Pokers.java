@@ -104,6 +104,141 @@ public class Pokers {
         {
             active = 4;
         }
+        
+        for(int m = 1; m <= 4; m++){
+            while(true){
+                //print current trick
+                System.out.print("Trick ");     System.out.println(trick);
+
+                //print hand card
+                for (int i = 0; i < hand.size(); i++) {
+                    System.out.println("Player " +(i+1)+ " : "+hand.get(i));
+                }
+
+                //print deck and center cards
+                System.out.println("Deck : " + pokerList);
+                System.out.println("Center : " + center);
+
+                //card input from user
+                System.out.println("Turn: Player " + active);
+                System.out.print("> ");
+                String cardChoice  = scan.nextLine();
+            
+                //checking center card suit and rank
+                String strCenter = center.toString();
+                char charCenterSuit = strCenter.charAt(1);
+                char charCenterRank = strCenter.charAt(2);
+                
+                if (active == 1){
+
+                    String strHand = hand1.toString();
+
+                    //check if user input exist in player hand and check input length, else throw error
+                    if(strHand.contains(cardChoice) && cardChoice.length() == 2){
+
+                        //check whether suit or rank is same with center card suit and rank, else throw error
+                        if(charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)){
+
+                            //remove played card from users hand and put played card to center
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = hand1.remove((index - 1) / 4);
+                            center.add(dealt);
+
+                            //change active player
+                            active = 2;
+
+                            //clear screen
+                            System.out.print("\033[H\033[2J");      System.out.flush();
+                            break;
+                        }
+                        else{
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+                    else{
+                        System.out.println("This card does not exist.");
+                    }
+                }
+                
+                else if (active == 2){
+
+                    String strHand = hand2.toString();
+
+                    if(strHand.contains(cardChoice) && cardChoice.length() == 2){
+
+                        if(charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)){
+
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = hand2.remove((index - 1) / 4);
+                            center.add(dealt);
+
+                            active = 3;
+
+                            System.out.print("\033[H\033[2J");  System.out.flush();
+                            break;
+                        }
+                        else{
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+                    else{
+                        System.out.println("This card does not exist.");
+                    }
+                }
+                
+                else if (active == 3){
+
+                    String strHand = hand3.toString();
+
+                    if(strHand.contains(cardChoice) && cardChoice.length() == 2){
+
+                        if(charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)){
+
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = hand3.remove((index - 1) / 4);
+                            center.add(dealt);
+
+                            active = 4;
+
+                            System.out.print("\033[H\033[2J");      System.out.flush();
+                            break;
+                        }
+                        else{
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+                    else{
+                        System.out.println("This card does not exist.");
+                    }
+                }
+
+                else{
+
+                    String strHand = hand4.toString();
+
+                    if(strHand.contains(cardChoice) && cardChoice.length() == 2){
+
+                        if(charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)){
+
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = hand4.remove((index - 1) / 4);
+                            center.add(dealt);
+
+                            active = 1;
+
+                            System.out.print("\033[H\033[2J");      System.out.flush();
+                            break;
+                        }
+                        else{
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+                    else{
+                        System.out.println("This card does not exist.");
+                    }
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
