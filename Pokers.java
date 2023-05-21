@@ -104,6 +104,9 @@ public class Pokers {
         {
             active = 4;
         }
+
+        //for checking of winner
+        String[] playerRank = {" ", " ", " "," "};
         
         for(int m = 1; m <= 4; m++){
             while(true){
@@ -144,8 +147,11 @@ public class Pokers {
                             Card dealt = hand1.remove((index - 1) / 4);
                             center.add(dealt);
 
-                            //change active player
+                            //change active plater
                             active = 2;
+                            
+                            //for winner checking
+                            playerRank[0] = cardChoice.substring(0,0) + cardChoice.substring(1);
 
                             //clear screen
                             System.out.print("\033[H\033[2J");      System.out.flush();
@@ -173,6 +179,8 @@ public class Pokers {
                             center.add(dealt);
 
                             active = 3;
+                            
+                            playerRank[1] = cardChoice.substring(0,0) + cardChoice.substring(1);
 
                             System.out.print("\033[H\033[2J");  System.out.flush();
                             break;
@@ -199,6 +207,8 @@ public class Pokers {
                             center.add(dealt);
 
                             active = 4;
+                            
+                            playerRank[2] = cardChoice.substring(0,0) + cardChoice.substring(1);
 
                             System.out.print("\033[H\033[2J");      System.out.flush();
                             break;
@@ -225,6 +235,8 @@ public class Pokers {
                             center.add(dealt);
 
                             active = 1;
+                            
+                            playerRank[3] = cardChoice.substring(0,0) + cardChoice.substring(1);
 
                             System.out.print("\033[H\033[2J");      System.out.flush();
                             break;
@@ -237,6 +249,42 @@ public class Pokers {
                         System.out.println("This card does not exist.");
                     }
                 }
+            }
+            //initialize winner checking variables
+            int winningRank = 0;
+            int winner = -1;
+    
+            //winner checking
+            for(int i = 0; i <= 3; i++){
+                for (int j = 0; j <= 12; j++){
+                    if(playerRank[i].equals(RANK[j]) && j > winningRank){
+                        winningRank = j;
+                        winner = i+1;
+                    }
+                }
+            }
+    
+            //!TBD
+            if(m == 4){
+                System.out.print("### Winner is player "); System.out.println(winner+"###"+"\n");
+                trick++;
+                active = winner + 1;
+                center.clear();
+                System.out.print("Trick ");     System.out.println(trick);
+                System.out.print("Player 1: ");     System.out.println(hand1);
+                System.out.print("Player 2: ");     System.out.println(hand2);
+                System.out.print("Player 3: ");     System.out.println(hand3);
+                System.out.print("Player 4: ");     System.out.println(hand4);
+                System.out.print("Center: ");       System.out.println(center);
+                System.out.print("Deck: ");     System.out.println(pokerList);
+                System.out.println("Turn: Player " + winner);
+                System.out.print("> ");
+                String cardChoice  = scan.nextLine();
+                String strHand = hand.get(winner-1).toString();
+                int index = strHand.indexOf(cardChoice);
+                Card dealt = hand2.remove((index - 1) / 4);
+                center.add(dealt);
+                m = 1;
             }
         }
     }
