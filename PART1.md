@@ -2,11 +2,11 @@
 
 ## A. Member Contributions
 
-No | ID         | Name  | Task descriptions | Contribution %
--- | ---------- | ---- | ----------------- | --------------
-1  | 1211102809 | Liau Kai Ze |Player gameplay, error checking, debugging| 34%
-2  | 1211102810 | Lai Cheng Yung |                   | 33%
-3  | 1211104336 | Lim Jia Hen | Deal card to players and center, creating deck, shuffle deck, players hand | 33%
+No | ID         | Name           | Task descriptions | Contribution %
+-- | ---------- | ----           | ----------------- | --------------
+1  | 1211102809 | Liau Kai Ze    |Player gameplay, error checking, debugging| 34%
+2  | 1211102810 | Lai Cheng Yung |Deciding which player is winner,declaring winner,winner start next round | 33%
+3  | 1211104336 | Lim Jia Hen    | Deal card to players and center, creating deck, shuffle deck, players hand | 33%
 
 ## B. Feature Completion
 
