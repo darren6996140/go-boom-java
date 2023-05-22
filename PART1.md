@@ -4,7 +4,7 @@
 
 No | ID         | Name  | Task descriptions | Contribution %
 -- | ---------- | ---- | ----------------- | --------------
-1  | 1211102809 | Liau Kai Ze |                   | 34%
+1  | 1211102809 | Liau Kai Ze |Player gameplay, error checking, debugging| 34%
 2  | 1211102810 | Lai Cheng Yung |                   | 33%
 3  | 1211104336 | Lim Jia Hen | Deal card to players and center, creating deck, shuffle deck, players hand | 33%
 
@@ -27,3 +27,5 @@ No | Feature                                                                    
 ## C. Link to Video Presentation
 
 Upload your video presentation to your Google drive or YouTube, then paste the link below. Give your lab lecturer the permission to view the video.
+
+https://www.youtube.com/watch?v=SRMa0LHWuTA
