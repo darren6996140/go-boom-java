@@ -4,8 +4,13 @@
 
 No | ID         | Name | Task descriptions | Contribution %
 -- | ---------- | ---- | ----------------- | --------------
+<<<<<<< Updated upstream
 1  | 1211102809 | Liau Kai Ze | Drawing cards, remove losing players | 30%
 2  | 1211102810 | Lai Cheng Yung | Exit, reset, winner checking and score | 30%
+=======
+1  | 1211102809 | Liau Kai Ze | Drawing cards, remove unplayable players in a trick | 30%
+2  | 1211102810 | Lai Cheng Yung || 30%
+>>>>>>> Stashed changes
 3  | 1211104336 | Lim Jia Hen | Save game, Load and resume the game with loaded data | 40%
 
 
