@@ -320,3 +320,432 @@ public class Pokers {
             e.printStackTrace();
         }
     }
+    
+    public static void playGame(List<List<Card>> hand, List<Card> pokerList, List<Card> center, int active,
+            String[] playerRank, int trick, int playersPlayed) {
+        for (int m = 1; m <= 4; m++) {
+            while (true) {
+                // print current trick
+                System.out.print("\nTrick ");
+                System.out.println(trick);
+
+                // print hand card
+                for (int i = 0; i < hand.size(); i++) {
+                    System.out.println("Player " + (i + 1) + " : " + hand.get(i));
+                }
+
+                // print deck and center cards
+                System.out.println("Deck : " + pokerList);
+                System.out.println("Center : " + center);
+
+                // card input from user
+                System.out.println("Turn: Player " + active);
+                System.out.print("> ");
+                String cardChoice = scan.nextLine();
+
+                // checking center card suit and rank
+                String strCenter = center.toString();
+                char charCenterSuit = strCenter.charAt(1);
+                char charCenterRank = strCenter.charAt(2);
+
+                if (active == 1) {
+
+                    List<Card> currentHand = hand.get(active - 1); // Here you get the hand of the active player.
+                    String strHand = currentHand.toString();
+
+                    // check if user input exist in player hand and check input length, else throw
+                    // error
+
+                    if (strHand.contains(cardChoice) && cardChoice.length() == 2) {
+
+                        // check whether suit or rank is same with center card suit and rank, else throw
+                        // error
+                        if (charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)) {
+
+                            // remove played card from users hand and put played card to center
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = currentHand.remove((index - 1) / 4);
+                            center.add(dealt);
+                            playersPlayed++;
+
+                            if (hand.get(active - 1).size() == 0) {
+                                System.out.println("Game Over since player 1 have play all the handcard.");
+                                System.out.println();
+                                countScore(hand);
+                            } else if (pokerList.isEmpty() && noValidCards(hand, charCenterSuit, charCenterRank)) {
+                                System.out.println("Game over since all the player do not have a valid card to play.");
+                                System.out.println();
+                                countScore(hand);
+                            }
+
+                            // change active player
+                            active = 2;
+
+                            // for winner checking
+                            playerRank[0] = cardChoice.substring(0, 0) + cardChoice.substring(1);
+
+                            // clear screen
+                            // System.out.print("\033[H\033[2J");
+                            // System.out.flush();
+                            break;
+                        }
+
+                        else {
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Draw")) {
+                        if (!pokerList.isEmpty()) {
+                            Card drawed = pokerList.remove(0);
+                            currentHand.add(drawed);
+                            System.out.println("[" + drawed + "] is added to your handcard.");
+                        } else {
+                            System.out.println("The deck is empty.");
+
+                            // Check if the player has a valid card to play
+                            boolean hasValidCard = false;
+                            for (Card hcard : currentHand) {
+                                String s = hcard.getSuit();
+                                String r = hcard.getRank();
+                                if (s.equals(String.valueOf(charCenterSuit))
+                                        || r.equals(String.valueOf(charCenterRank))) {
+                                    hasValidCard = true;
+                                    break;
+                                }
+                            }
+
+                            if (!hasValidCard) {
+                                System.out.println(
+                                        "You do not have a valid card to play. You have been skip from this trick.");
+                                // Skip the player's turn
+                                playersPlayed++;
+                                active = active % 4 + 1;
+                                break;
+                            }
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Reset")) {
+                        System.out.println("----------------Game Reset---------------");
+                        start();
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Exit")) {
+                        System.out.println("Do you want to save the game before exit? [Y/N] ");
+                        System.out.print("> ");
+                        String ex = scan.nextLine();
+                        if (ex.equalsIgnoreCase("Y")) {
+                            saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                        } else {
+                            System.out.println("----------------Exit Sucessfully---------------");
+                            System.exit(0);
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Save")) {
+                        saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Load")) {
+                        loadGame();
+                    }
+
+                    else {
+                        System.out.println("This card does not exist or is unplayable.");
+                    }
+                }
+
+                else if (active == 2) {
+
+                    List<Card> currentHand = hand.get(active - 1); // Here you get the hand of the active player.
+                    String strHand = currentHand.toString();
+
+                    if (strHand.contains(cardChoice) && cardChoice.length() == 2) {
+
+                        if (charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)) {
+
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = currentHand.remove((index - 1) / 4);
+                            center.add(dealt);
+                            playersPlayed++;
+
+                            if (hand.get(active - 1).size() == 0) {
+                                System.out.println("Game Over since player 2 have play all the handcard.");
+                                System.out.println();
+                                countScore(hand);
+                            } else if (pokerList.isEmpty() && noValidCards(hand, charCenterSuit, charCenterRank)) {
+                                System.out.println("Game over since all the player do not have a valid card to play.");
+                                System.out.println();
+                                countScore(hand);
+                            }
+
+                            active = 3;
+
+                            playerRank[1] = cardChoice.substring(0, 0) + cardChoice.substring(1);
+
+                            // System.out.print("\033[H\033[2J");
+                            // System.out.flush();
+                            break;
+                        } else {
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Draw")) {
+                        if (!pokerList.isEmpty()) {
+                            Card drawed = pokerList.remove(0);
+                            currentHand.add(drawed);
+                            System.out.println("[" + drawed + "] is added to your handcard.");
+                        } else {
+                            System.out.println("The deck is empty.");
+
+                            // Check if the player has a valid card to play
+                            boolean hasValidCard = false;
+                            for (Card hcard : currentHand) {
+                                String s = hcard.getSuit();
+                                String r = hcard.getRank();
+                                if (s.equals(String.valueOf(charCenterSuit))
+                                        || r.equals(String.valueOf(charCenterRank))) {
+                                    hasValidCard = true;
+                                    break;
+                                }
+                            }
+
+                            if (!hasValidCard) {
+                                System.out.println(
+                                        "You do not have a valid card to play. You have been skip from this trick.");
+                                // Skip the player's turn
+                                playersPlayed++;
+                                active = active % 4 + 1;
+                                break;
+                            }
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Reset")) {
+                        System.out.println("----------------Game Reset---------------");
+                        start();
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Exit")) {
+                        System.out.println("Do you want to save the game before exit? [Y/N] ");
+                        System.out.print("> ");
+                        String ex = scan.nextLine();
+                        if (ex.equalsIgnoreCase("Y")) {
+                            saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                        } else {
+                            System.out.println("----------------Exit Sucessfully---------------");
+                            System.exit(0);
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Save")) {
+                        saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Load")) {
+                        loadGame();
+                    }
+
+                    else {
+                        System.out.println("This card does not exist or is unplayable.");
+                    }
+                }
+
+                else if (active == 3) {
+
+                    List<Card> currentHand = hand.get(active - 1); // Here you get the hand of the active player.
+                    String strHand = currentHand.toString();
+
+                    if (strHand.contains(cardChoice) && cardChoice.length() == 2) {
+
+                        if (charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)) {
+
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = currentHand.remove((index - 1) / 4);
+                            center.add(dealt);
+                            playersPlayed++;
+
+                            if (hand.get(active - 1).size() == 0) {
+                                System.out.println("Game Over since player 3 have play all the handcard.");
+                                System.out.println();
+                                countScore(hand);
+                            } else if (pokerList.isEmpty() && noValidCards(hand, charCenterSuit, charCenterRank)) {
+                                System.out.println("Game over since all the player do not have a valid card to play.");
+                                System.out.println();
+                                countScore(hand);
+                            }
+
+                            active = 4;
+
+                            playerRank[2] = cardChoice.substring(0, 0) + cardChoice.substring(1);
+
+                            // System.out.print("\033[H\033[2J");
+                            // System.out.flush();
+                            break;
+                        } else {
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Draw")) {
+                        if (!pokerList.isEmpty()) {
+                            Card drawed = pokerList.remove(0);
+                            currentHand.add(drawed);
+                            System.out.println("[" + drawed + "] is added to your handcard.");
+                        } else {
+                            System.out.println("The deck is empty.");
+
+                            // Check if the player has a valid card to play
+                            boolean hasValidCard = false;
+                            for (Card hcard : currentHand) {
+                                String s = hcard.getSuit();
+                                String r = hcard.getRank();
+                                if (s.equals(String.valueOf(charCenterSuit))
+                                        || r.equals(String.valueOf(charCenterRank))) {
+                                    hasValidCard = true;
+                                    break;
+                                }
+                            }
+
+                            if (!hasValidCard) {
+                                System.out.println(
+                                        "You do not have a valid card to play. You have been skip from this trick.");
+                                // Skip the player's turn
+                                playersPlayed++;
+                                active = active % 4 + 1;
+                                break;
+                            }
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Reset")) {
+                        System.out.println("----------------Game Reset---------------");
+                        start();
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Exit")) {
+                        System.out.println("Do you want to save the game before exit? [Y/N] ");
+                        System.out.print("> ");
+                        String ex = scan.nextLine();
+                        if (ex.equalsIgnoreCase("Y")) {
+                            saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                        } else {
+                            System.out.println("----------------Exit Sucessfully---------------");
+                            System.exit(0);
+                        }
+
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Save")) {
+                        saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Load")) {
+                        loadGame();
+                    }
+
+                    else {
+                        System.out.println("This card does not exist or is unplayable.");
+                    }
+                }
+
+                else {
+
+                    List<Card> currentHand = hand.get(active - 1); // Here you get the hand of the active player.
+                    String strHand = currentHand.toString();
+
+                    if (strHand.contains(cardChoice) && cardChoice.length() == 2) {
+
+                        if (charCenterSuit == cardChoice.charAt(0) || charCenterRank == cardChoice.charAt(1)) {
+
+                            int index = strHand.indexOf(cardChoice);
+                            Card dealt = currentHand.remove((index - 1) / 4);
+                            center.add(dealt);
+                            playersPlayed++;
+
+                            if (hand.get(active - 1).size() == 0) {
+                                System.out.println("Game Over since player 4 have play all the handcard.");
+                                System.out.println();
+                                countScore(hand);
+                            } else if (pokerList.isEmpty() && noValidCards(hand, charCenterSuit, charCenterRank)) {
+                                System.out.println("Game over since all the player do not have a valid card to play.");
+                                System.out.println();
+                                countScore(hand);
+                            }
+
+                            active = 1;
+
+                            playerRank[3] = cardChoice.substring(0, 0) + cardChoice.substring(1);
+
+                            // System.out.print("\033[H\033[2J");
+                            // System.out.flush();
+                            break;
+                        } else {
+                            System.out.println("This card is unplayable.");
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Draw")) {
+                        if (!pokerList.isEmpty()) {
+                            Card drawed = pokerList.remove(0);
+                            currentHand.add(drawed);
+                            System.out.println("[" + drawed + "] is added to your handcard.");
+                        } else {
+                            System.out.println("The deck is empty.");
+
+                            // Check if the player has a valid card to play
+                            boolean hasValidCard = false;
+                            for (Card hcard : currentHand) {
+                                String s = hcard.getSuit();
+                                String r = hcard.getRank();
+                                if (s.equals(String.valueOf(charCenterSuit))
+                                        || r.equals(String.valueOf(charCenterRank))) {
+                                    hasValidCard = true;
+                                    break;
+                                }
+                            }
+
+                            if (!hasValidCard) {
+                                System.out.println(
+                                        "You do not have a valid card to play. You have been skip from this trick.");
+                                // Skip the player's turn
+                                playersPlayed++;
+                                active = active % 4 + 1;
+                                break;
+                            }
+                        }
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Reset")) {
+                        System.out.println("----------------Game Reset---------------");
+                        start();
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Exit")) {
+                        System.out.println("Do you want to save the game before exit? [Y/N] ");
+                        System.out.print("> ");
+                        String ex = scan.nextLine();
+                        if (ex.equalsIgnoreCase("Y")) {
+                            saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                        } else {
+                            System.out.println("----------------Exit Sucessfully---------------");
+                            System.exit(0);
+                        }
+
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Save")) {
+                        saveGame(hand, pokerList, center, active, playerRank, trick, playersPlayed);
+                    }
+
+                    else if (cardChoice.equalsIgnoreCase("Load")) {
+                        loadGame();
+                    }
+
+                    else {
+                        System.out.println("This card does not exist or is unplayable.");
+                    }
+                }
+            }
