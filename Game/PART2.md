@@ -4,9 +4,9 @@
 
 No | ID         | Name | Task descriptions | Contribution %
 -- | ---------- | ---- | ----------------- | --------------
-1  | 1211102809 | Liau Kai Ze ||
-2  | 1211102810 | Lai Cheng Yung ||
-3  | 1211104336 | Lim Jia Hen | Save game, Load and resume the game with loaded data | 
+1  | 1211102809 | Liau Kai Ze | Drawing cards, remove losing players | 30%
+2  | 1211102810 | Lai Cheng Yung || 30%
+3  | 1211104336 | Lim Jia Hen | Save game, Load and resume the game with loaded data | 40%
 
 
 ## B. Part 1 Feature Completion (Latest)
