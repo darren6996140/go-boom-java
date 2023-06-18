@@ -6,7 +6,7 @@ No | ID         | Name | Task descriptions | Contribution %
 -- | ---------- | ---- | ----------------- | --------------
 1  | 1211102809 | Liau Kai Ze ||
 2  | 1211102810 | Lai Cheng Yung ||
-3  | 1211104336 | Lim Jia Hen || Save game, Load and resume the game with loaded game
+3  | 1211104336 | Lim Jia Hen || Save game, Load and resume the game with loaded date
 
 
 ## B. Part 1 Feature Completion (Latest)
