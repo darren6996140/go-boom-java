@@ -749,3 +749,57 @@ public class Pokers {
                     }
                 }
             }
+
+            // initialize winner checking variables
+            int winningRank = 0;
+            int winner = -1;
+
+            // winner checking
+            for (int i = 0; i <= 3; i++) {
+                for (int j = 0; j <= 12; j++) {
+                    if (playerRank[i].equals(RANK[j]) && j > winningRank) {
+                        winningRank = j;
+                        winner = i + 1;
+                    }
+                }
+            }
+
+            // !TBD
+            if (playersPlayed % 4 == 0) {
+                System.out.print("### Winner is player ");
+                System.out.println(winner + "###" + "\n");
+                trick++;
+                active = winner + 1;
+                center.clear();
+                System.out.print("Trick ");
+                System.out.println(trick);
+                System.out.print("Player 1: ");
+                System.out.println(hand.get(0));
+                System.out.print("Player 2: ");
+                System.out.println(hand.get(1));
+                System.out.print("Player 3: ");
+                System.out.println(hand.get(2));
+                System.out.print("Player 4: ");
+                System.out.println(hand.get(3));
+                System.out.print("Center: ");
+                System.out.println(center);
+                System.out.print("Deck: ");
+                System.out.println(pokerList);
+                System.out.println("Turn: Player " + winner);
+                System.out.print("> ");
+                String cardChoice = scan.nextLine();
+                String strHand = hand.get(winner - 1).toString();
+                int index = strHand.indexOf(cardChoice);
+                Card dealt = hand.get(winner - 1).remove((index - 1) / 4);
+                center.add(dealt);
+                m = 1;
+                playersPlayed = 0;
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+        start();
+    }
+}
