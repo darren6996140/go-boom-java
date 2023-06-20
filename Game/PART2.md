@@ -44,3 +44,9 @@ No | Feature                                                                    
 ## D. Link to Part 2 GitHub Repo
 
 https://github.com/darren6996140/go-boom-java
+
+## E. Link to Video Presentation
+
+Upload your video presentation to your Google drive or YouTube, then paste the link below. Give your lab lecturer the permission to view the video.
+
+https://www.youtube.com/watch?v=k7Qj4SjVjKY
